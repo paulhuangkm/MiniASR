@@ -23,13 +23,11 @@ class ASR(BaseASR):
         super().__init__(tokenizer, args)
 
         self.prenet = nn.Linear(self.in_dim, args.model.encoder.dim)
-        self.sublayer = nn.Sequential(
-            ConformerBlock(
+        self.sublayer = ConformerBlock(
                 dim_head = 64,
                 heads = 2,
                 **args.model.encoder
             )
-        )
         self.encoder = nn.Sequential(
             self.prenet,
             self.sublayer,
