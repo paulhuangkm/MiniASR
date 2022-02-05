@@ -135,7 +135,7 @@ class ASR(BaseASR):
         log_probs = torch.log_softmax(logits, dim=2)
 
         # Compute loss
-        with torch.backends.cudnn.flags(deterministic=True):
+        with torch.backends.cudnn.flags(deterministic=False):
             # for reproducibility
             ctc_loss = self.ctc_loss(
                 log_probs.transpose(0, 1),
