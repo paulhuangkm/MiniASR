@@ -25,9 +25,9 @@ class ASR(BaseASR):
         self.prenet = nn.Linear(self.in_dim, 512)
         self.sublayer = nn.Sequential(
             ConformerBlock(
-                dim = 512,
-                dim_head = 128,
-                heads = 4,
+                dim = args.model.encoder.hid_dim,
+                dim_head = 64,
+                heads = 2,
                 **args.model.encoder
             )
         )
@@ -40,7 +40,7 @@ class ASR(BaseASR):
         )
 
         self.ctc_output_layer = nn.Linear(
-            self.in_dim, self.vocab_size)
+            args.model.encoder.hid_dim, self.vocab_size)
         
         # Loss function (CTC loss)
         self.ctc_loss = torch.nn.CTCLoss(blank=0, zero_infinity=True)
