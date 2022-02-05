@@ -50,7 +50,7 @@ setup(
         "tqdm",
         "numpy>=1.19.5",
         "sentencepiece>=0.1.96",
-        "pytorch-lightning>=1.3.8",
+        "pytorch-lightning==1.3.8",
         "easydict",
         "joblib>=0.12.4",
         "librosa>=0.7.2",
