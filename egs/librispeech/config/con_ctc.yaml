@@ -33,9 +33,9 @@ model:
     time_warp_w: 80
 
 hparam:
-  train_batch_size: 32
-  val_batch_size: 32
-  accum_grad: 1
+  train_batch_size: 8
+  val_batch_size: 8
+  accum_grad: 4
   grad_clip: 5
   njobs: 4
   pin_memory: true
