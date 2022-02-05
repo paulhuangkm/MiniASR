@@ -34,8 +34,6 @@ class ASR(BaseASR):
             self.sublayer,
             self.sublayer,
             self.sublayer,
-            self.sublayer,
-            self.sublayer,
             self.sublayer
         )
 
