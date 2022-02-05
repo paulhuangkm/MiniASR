@@ -60,6 +60,7 @@ setup(
         "torchaudio>=0.7.0",
         "torchvision>=0.8.0",
         "torchtext>=0.8.0",
+        "conformer",
     ],
 
     entry_points={
