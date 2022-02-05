@@ -28,15 +28,13 @@ class ASR(BaseASR):
                 dim_head = self.in_dim,
                 heads = 1,
                 **args.model.encoder
-            ),
-            ConformerBlock(
-                dim = self.in_dim,
-                dim_head = self.in_dim,
-                heads = 1,
-                **args.model.encoder
             )
         )
         self.encoder = nn.Sequential(
+            self.sublayer,
+            self.sublayer,
+            self.sublayer,
+            self.sublayer,
             self.sublayer,
             self.sublayer
         )
