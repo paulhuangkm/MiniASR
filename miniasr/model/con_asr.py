@@ -31,8 +31,6 @@ class ASR(BaseASR):
         self.encoder = nn.Sequential(
             self.prenet,
             self.sublayer,
-            self.sublayer,
-            self.sublayer,
             self.sublayer
         )
 
