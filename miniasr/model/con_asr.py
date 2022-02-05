@@ -127,7 +127,7 @@ class ASR(BaseASR):
         feat, feat_len = self.extract_features(wave, wave_len)
 
         # Encode features
-        enc, enc_len = self.encoder(feat, feat_len)
+        enc, enc_len = self.encoder(feat), feat_len
 
         # Project hidden features to vocabularies
         logits = self.ctc_output_layer(enc)
