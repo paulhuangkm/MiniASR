@@ -134,7 +134,7 @@ class ASR(BaseASR):
         feat = self.prenet(feat)
         feat = feat.transpose(1, 2)
         
-        enc, enc_len = self.encoder(feat), feat_len
+        enc, enc_len = self.encoder(feat), feat_len // 2
 
         # Project hidden features to vocabularies
         logits = self.ctc_output_layer(enc)
