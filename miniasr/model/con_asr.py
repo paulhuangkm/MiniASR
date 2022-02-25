@@ -22,20 +22,30 @@ class ASR(BaseASR):
     def __init__(self, tokenizer, args):
         super().__init__(tokenizer, args)
 
-        self.prenet = nn.Linear(self.in_dim, args.model.encoder.dim)
-        self.sublayer = ConformerBlock(
+        self.prenet = nn.Conv1d(self.in_dim, args.model.encoder.dim, 7, 2, 3)
+
+        self.encoder = nn.Sequential(
+            ConformerBlock(
+                dim_head = 64,
+                heads = 2,
+                **args.model.encoder
+            ),
+            ConformerBlock(
+                dim_head = 64,
+                heads = 2,
+                **args.model.encoder
+            ),
+            ConformerBlock(
+                dim_head = 64,
+                heads = 2,
+                **args.model.encoder
+            ),
+            ConformerBlock(
                 dim_head = 64,
                 heads = 2,
                 **args.model.encoder
             )
-        self.encoder = nn.Sequential(
-            self.prenet,
-            self.sublayer,
-            self.sublayer,
-            self.sublayer,
-            self.sublayer
         )
-
         self.ctc_output_layer = nn.Linear(
             args.model.encoder.dim, self.vocab_size)
         
@@ -120,6 +130,10 @@ class ASR(BaseASR):
         feat, feat_len = self.extract_features(wave, wave_len)
 
         # Encode features
+        feat = feat.transpose(1, 2)
+        feat = self.prenet(feat)
+        feat = feat.transpose(1, 2)
+        
         enc, enc_len = self.encoder(feat), feat_len
 
         # Project hidden features to vocabularies
