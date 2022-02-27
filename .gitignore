@@ -8,7 +8,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 data/
-model/
 
 # C extensions
 *.so
