@@ -145,7 +145,6 @@ class ASR(BaseASR):
         return enc, enc_len, feat, feat_len // 2
 
     def cal_loss(self, enc, enc_len, feat, feat_len, text, text_len):
-        assert enc_len >= text_len and feat_len >= text_len and feat_len == enc_len
         
         dp = [[None for _ in range(enc_len - text_len + 1)] for __ in range(text_len + 1)]
         print(text)
