@@ -1,0 +1,30 @@
+ckpt: model/con_libri-10h_char/epoch=174-step=15224.ckpt
+config: ../egs/librispeech/config/con_ctc_test.yaml
+cpu: false
+data:
+  dev_paths:
+  - data/libri_test/data_list_sorted.json
+  text:
+    mode: character
+    vocab: data/libri_train_1h/vocab_char.txt
+decode:
+  type: greedy
+detect_anomaly: false
+hparam:
+  njobs: 4
+  pin_memory: true
+  val_batch_size: 16
+log_file: none
+log_level: INFO
+mode: dev
+njobs: 2
+override: args.data.dev_paths=['data/libri_test/data_list_sorted.json']
+seed: 7122
+test: true
+test_name: test_result
+test_res: model/con_libri-10h_char
+trainer:
+  default_root_dir: model/con_libri-10h_char
+  deterministic: true
+  gpus: 1
+  logger: false

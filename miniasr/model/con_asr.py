@@ -24,28 +24,16 @@ class ASR(BaseASR):
 
         self.prenet = nn.Conv1d(self.in_dim, args.model.encoder.dim, 7, 2, 3)
 
-        self.encoder = nn.Sequential(
-            ConformerBlock(
-                dim_head = 64,
-                heads = 2,
-                **args.model.encoder
-            ),
-            ConformerBlock(
-                dim_head = 64,
-                heads = 2,
-                **args.model.encoder
-            ),
-            ConformerBlock(
-                dim_head = 64,
-                heads = 2,
-                **args.model.encoder
-            ),
-            ConformerBlock(
-                dim_head = 64,
-                heads = 2,
-                **args.model.encoder
+        self.encoder = []
+        for i in range(4):
+            self.encoder.append(
+                ConformerBlock(
+                    dim_head = 64,
+                    heads = 2,
+                    **args.model.encoder
+                )
             )
-        )
+        self.encoder = nn.Sequential(*self.encoder)
         self.ctc_output_layer = nn.Linear(
             args.model.encoder.dim, self.vocab_size)
         

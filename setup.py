@@ -65,7 +65,7 @@ setup(
 
     entry_points={
         "console_scripts": [
-            "minasr-asr = run_asr:main",
+            "miniasr-asr = run_asr:main",
             "miniasr-preprocess = run_preprocess:main",
         ],
     },

@@ -1,0 +1,25 @@
+result of val_set:
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     288456   | 14.4   7.5    4.6    26.4   99.9   |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     54402    | 58.2   5.0    5.5    68.7   99.9   |
+
+RTF:     0.0004
+Latency: 3.1329 [ms/sentence]
+
+result of test_set:
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     281530   | 14.1   7.6    4.6    26.3   100.0  |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     52576    | 58.1   5.0    5.4    68.6   100.0  |
+
+RTF:     0.0004
+Latency: 3.1618 [ms/sentence]
