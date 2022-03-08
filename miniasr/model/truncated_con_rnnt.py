@@ -72,6 +72,19 @@ def build_decoder(config, tokenizer):
         tokenizer=tokenizer
     )
 
+def truncate_mask(dim, max_length=-1, window_size=100, dtype=None):
+    max_length = max_length
+    mask = torch.zeros(dim, max_length).to('cuda:0')
+    # print(mask.shape)
+    for i in range(mask.shape[0]):
+        for j in range(window_size + 1):
+            l, r = max(i - j, 0), min(i + j, max_length - 1)
+            mask[i][l] = mask[i][r] = 1
+    # mask = mask.repeat([bs * head, 1, 1])
+    if dtype is not None:
+        mask = mask.type(dtype)
+    return mask
+
 class BaseEncoder(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, n_layers, dropout=0.2, args=None):
         super(BaseEncoder, self).__init__()
@@ -90,6 +103,7 @@ class BaseEncoder(nn.Module):
                                      output_size,
                                      bias=True)
         self.n_layers = n_layers
+        self.head = args.enc.conformer.heads
 
     def forward(self, inputs, input_lengths):
         assert inputs.dim() == 3
@@ -101,8 +115,7 @@ class BaseEncoder(nn.Module):
 
         # self.encoder.flatten_parameters()
         outputs = self.pre_linear(inputs)
-        outputs = self.encoder(outputs)
-
+        outputs = self.encoder((outputs, truncate_mask(outputs.shape[1], outputs.shape[1], window_size=8, dtype=torch.bool)))
         if input_lengths is not None:
             _, desorted_indices = torch.sort(indices, descending=False)
             # outputs, _ = nn.utils.rnn.pad_packed_sequence(outputs, batch_first=True)

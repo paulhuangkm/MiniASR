@@ -26,8 +26,14 @@ def create_asr_trainer(args, device):
             from miniasr.model.ctc_asr import ASR
         elif args.model.name == 'con_asr':
             from miniasr.model.con_asr import ASR
-        elif args.model.name == 'con_rnnt':
+        elif args.model.name == 'con_trans':
             from miniasr.model.con_rnnt import ASR
+        elif args.model.name == 'trunc_con_trans':
+            from miniasr.model.truncated_con_rnnt import ASR
+        elif args.model.name == 'transformer_trans':
+            from miniasr.model.transformer_trans import ASR
+        elif args.model.name == 'las_asr':
+            from miniasr.model.las_asr import ASR
         else:
             raise NotImplementedError(
                 '{} ASR type is not supported.'.format(args.model.name))

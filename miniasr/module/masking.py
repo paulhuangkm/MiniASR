@@ -25,3 +25,15 @@ def len_to_mask(lengths, max_length=-1, dtype=None):
     if dtype is not None:
         mask = mask.type(dtype)
     return mask
+
+def truncate_mask(dim, max_length=-1, window_size=100, dtype=None):
+    max_length = max_length
+    mask = torch.zeros(dim, max_length).to('cuda:0')
+    # print(mask.shape)
+    for i in range(mask.shape[0]):
+        for j in range(window_size + 1):
+            l, r = max(i - j, 0), min(i + j, max_length - 1)
+            mask[i][l] = mask[i][r] = 1
+    if dtype is not None:
+        mask = mask.type(dtype)
+    return mask

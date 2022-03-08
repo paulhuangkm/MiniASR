@@ -2,14 +2,17 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from warprnnt_pytorch import RNNTLoss
+from conformer import ConformerBlock
+from miniasr.module.masking import truncate_mask
+
 
 class BaseDecoder(nn.Module):
-    def __init__(self, hidden_size, vocab_size, output_size, n_layers, dropout=0.2, share_weight=False):
+    def __init__(self, hidden_size, vocab_size, output_size, n_layers, dropout=0.2, share_weight=False, tokenizer=None):
         super(BaseDecoder, self).__init__()
 
         self.embedding = nn.Embedding(vocab_size, hidden_size, padding_idx=0)
 
-        self.lstm = nn.LSTM(
+        self.decoder = nn.LSTM(
             input_size=hidden_size,
             hidden_size=hidden_size,
             num_layers=n_layers,
@@ -32,8 +35,8 @@ class BaseDecoder(nn.Module):
             embed_inputs = nn.utils.rnn.pack_padded_sequence(
                 embed_inputs, sorted_seq_lengths, batch_first=True)
 
-        self.lstm.flatten_parameters()
-        outputs, hidden = self.lstm(embed_inputs, hidden)
+        self.decoder.flatten_parameters()
+        outputs, hidden = self.decoder(embed_inputs, hidden)
 
         if length is not None:
             _, desorted_indices = torch.sort(indices, descending=False)
@@ -45,35 +48,42 @@ class BaseDecoder(nn.Module):
         return outputs, hidden
 
 
-def build_decoder(config):
-    if config.dec.type == 'lstm':
-        return BaseDecoder(
-            hidden_size=config.dec.hidden_size,
-            vocab_size=config.vocab_size,
-            output_size=config.dec.output_size,
-            n_layers=config.dec.n_layers,
-            dropout=config.dropout,
-            share_weight=config.share_weight
-        )
-    else:
-        raise NotImplementedError
+def build_decoder(config, tokenizer):
+    return BaseDecoder(
+        hidden_size=config.dec.hidden_size,
+        vocab_size=config.vocab_size,
+        output_size=config.dec.output_size,
+        n_layers=config.dec.n_layers,
+        dropout=config.dropout,
+        share_weight=config.share_weight,
+        tokenizer=tokenizer
+    )
 
 class BaseEncoder(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, n_layers, dropout=0.2, bidirectional=True):
+    def __init__(self, input_size, hidden_size, output_size, n_layers, dropout=0.2, args=None):
         super(BaseEncoder, self).__init__()
 
-        self.lstm = nn.LSTM(
-            input_size=input_size,
-            hidden_size=hidden_size,
-            num_layers=n_layers,
-            batch_first=True,
-            dropout=dropout,
-            bidirectional=bidirectional
-        )
+        self.pre_linear = nn.Linear(input_size, hidden_size)
+        # self.encoder = []
+        # for i in range(n_layers):
+        #     self.encoder.append(
+        #         ConformerBlock(
+        #             dim_head = 64,
+        #             heads = 2,
+        #             **args.enc.conformer
+        #         )
+        #     )
+        # self.encoder = nn.Sequential(*self.encoder)
 
-        self.output_proj = nn.Linear(2 * hidden_size if bidirectional else hidden_size,
+        self.encoder_layer = nn.TransformerEncoderLayer(
+                    **args.enc.transformer
+                )
+        self.encoder = nn.TransformerEncoder(self.encoder_layer, n_layers)
+
+        self.output_proj = nn.Linear(hidden_size,
                                      output_size,
                                      bias=True)
+        self.n_layers = n_layers
 
     def forward(self, inputs, input_lengths):
         assert inputs.dim() == 3
@@ -81,33 +91,34 @@ class BaseEncoder(nn.Module):
         if input_lengths is not None:
             sorted_seq_lengths, indices = torch.sort(input_lengths, descending=True)
             inputs = inputs[indices]
-            inputs = nn.utils.rnn.pack_padded_sequence(inputs, sorted_seq_lengths, batch_first=True)
+            # inputs = nn.utils.rnn.pack_padded_sequence(inputs, sorted_seq_lengths, batch_first=True)
 
-        self.lstm.flatten_parameters()
-        outputs, hidden = self.lstm(inputs)
+        # self.encoder.flatten_parameters()
+        outputs = self.pre_linear(inputs)
+        outputs = self.encoder(outputs, truncate_mask(outputs.shape[0], outputs.shape[0], window_size=200))
+        # outputs = self.pre_linear(inputs)
+        # for i in range(self.n_layers):
+            # outputs = self.encoder_layer(outputs, truncate_mask(outputs.shape[0], outputs.shape[0]))
 
         if input_lengths is not None:
             _, desorted_indices = torch.sort(indices, descending=False)
-            outputs, _ = nn.utils.rnn.pad_packed_sequence(outputs, batch_first=True)
+            # outputs, _ = nn.utils.rnn.pad_packed_sequence(outputs, batch_first=True)
             outputs = outputs[desorted_indices]
 
         logits = self.output_proj(outputs)
 
-        return logits, hidden
+        return logits
 
 
 def build_encoder(config):
-    if config.enc.type == 'lstm':
-        return BaseEncoder(
-            input_size=config.feature_dim,
-            hidden_size=config.enc.hidden_size,
-            output_size=config.enc.output_size,
-            n_layers=config.enc.n_layers,
-            dropout=config.dropout,
-            bidirectional=config.enc.bidirectional
-        )
-    else:
-        raise NotImplementedError
+    return BaseEncoder(
+        input_size=config.feature_dim,
+        hidden_size=config.enc.hidden_size,
+        output_size=config.enc.output_size,
+        n_layers=config.enc.n_layers,
+        dropout=config.dropout,
+        args = config
+    )
 
 class JointNet(nn.Module):
     def __init__(self, input_size, inner_dim, vocab_size):
@@ -141,13 +152,13 @@ class JointNet(nn.Module):
 
 
 class Transducer(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, tokenizer):
         super(Transducer, self).__init__()
         # define encoder
         self.config = config
         self.encoder = build_encoder(config)
         # define decoder
-        self.decoder = build_decoder(config)
+        self.decoder = build_decoder(config, tokenizer)
         # define JointNet
         self.joint = JointNet(
             input_size=config.joint.input_size,
@@ -163,14 +174,19 @@ class Transducer(nn.Module):
 
     def forward(self, inputs, inputs_length, targets, targets_length):
 
-        enc_state, _ = self.encoder(inputs, inputs_length)
+        enc_state = self.encoder(inputs, inputs_length)
         concat_targets = F.pad(targets, pad=(1, 0, 0, 0), value=0)
 
         dec_state, _ = self.decoder(concat_targets, targets_length.add(1))
 
         logits = self.joint(enc_state, dec_state)
 
-
+        # print(logits.shape)
+        # print(targets.shape)
+        # print(inputs_length.shape)
+        # print(targets_length.shape)
+        # print(inputs_length)
+        # print(targets_length)
         loss = self.crit(logits.type(torch.float32), targets.int(), inputs_length.int().cuda(), targets_length.int().cuda())
         return loss
 
@@ -178,7 +194,7 @@ class Transducer(nn.Module):
 
         batch_size = inputs.size(0)
 
-        enc_states, _ = self.encoder(inputs, inputs_length)
+        enc_states = self.encoder(inputs, inputs_length)
 
         zero_token = torch.LongTensor([[0]])
         if inputs.is_cuda:
@@ -188,13 +204,12 @@ class Transducer(nn.Module):
             token_list = []
 
             dec_state, hidden = self.decoder(zero_token)
-
             # print(lengths)
             for t in range(lengths):
                 logits = self.joint(enc_state[t].view(-1), dec_state.view(-1))
+                out = F.softmax(logits, dim=0).detach()
                 # if t < 10:
                 #     print(logits)
-                out = F.softmax(logits, dim=0).detach()
                 pred = torch.argmax(logits, dim=0)
                 pred = int(pred.item())
 
@@ -206,7 +221,7 @@ class Transducer(nn.Module):
                         token = token.cuda()
 
                     dec_state, hidden = self.decoder(token, hidden=hidden)
-                elif pred == 1:
+                if pred == 1:
                     token_list.append(pred)
                     break
             # print(token_list)

@@ -1,0 +1,20 @@
+result of val_set:
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     288456   | 13.7   7.2    4.5    25.3   100.0  |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     54402    | 56.0   5.0    5.4    66.4   100.0  |
+
+result of test_set:
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     281530   | 13.6   7.3    4.4    25.3   99.9   |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     52576    | 56.1   5.1    5.3    66.6   99.9   |
+
+

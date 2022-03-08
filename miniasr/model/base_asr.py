@@ -9,11 +9,14 @@ from os.path import join
 import time
 import torch
 import pytorch_lightning as pl
+from torch.optim.lr_scheduler import LambdaLR
+from torch.optim import Optimizer
+import math
 
 from miniasr.module import FeatureSelection
 from miniasr.utils import (
     sequence_distance, sequence_distance_full, print_eval_error_rates, freeze_model)
-from miniasr.data.audio import SpecAugment
+from miniasr.data.audio import SpecAugment, AdaptiveSpecAugment
 
 
 def get_model_stride(name):
@@ -65,6 +68,8 @@ class BaseASR(pl.LightningModule):
         self.specaug = None
         if args.model.get('specaugment', None):
             self.specaug = SpecAugment(**args.model.specaugment)
+        elif args.model.get('adaptspecaugment', None):
+            self.specaug = AdaptiveSpecAugment(**args.model.adaptspecaugment)
 
         # Timer setup (for testing)
         self.time_count = 0.0
@@ -72,8 +77,35 @@ class BaseASR(pl.LightningModule):
 
     def configure_optimizers(self):
         ''' Sets optimizer. '''
-        return getattr(torch.optim, self.args.model.optim.algo)(
-            self.parameters(), **self.args.model.optim.kwargs)
+        def get_cosine_schedule_with_warmup(
+            optimizer: Optimizer,
+            num_warmup_steps: int,
+            num_training_steps: int,
+            num_cycles: float = 0.5,
+            last_epoch: int = -1,
+            ):
+            def lr_lambda(current_step):
+                if current_step < num_warmup_steps:
+                    return float(current_step) / float(max(1, num_warmup_steps))
+                progress = float(current_step - num_warmup_steps) / float(
+                    max(1, num_training_steps - num_warmup_steps)
+                )
+                return max(
+                    0.0, 0.5 * (1.0 + math.cos(math.pi * float(num_cycles) * 2.0 * progress))
+                )
+
+            return LambdaLR(optimizer, lr_lambda, last_epoch)
+        class qqpr(Optimizer):
+            def __init__(self, args, params):
+                self.optim = getattr(torch.optim, args.model.optim.algo)(
+                    params(), **args.model.optim.kwargs)
+                self.scheduler = get_cosine_schedule_with_warmup(self.optim, 100, 100 * args.trainer.max_epochs)
+                self.state = self.optim.state
+                self.param_groups = self.optim.param_groups
+            def step(self):
+                self.optim.step()
+                self.scheduler.step()
+        return qqpr(self.args, self.parameters)
 
     def cal_feat_len(self, x_len: torch.Tensor):
         ''' Calculates feature lengths. '''

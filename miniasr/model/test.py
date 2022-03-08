@@ -131,7 +131,7 @@ class JointNet(nn.Module):
         self.dec_foward = nn.Linear(dec_size, inner_dim, bias=True)
 
         self.tanh = nn.Tanh()
-        self.project_layer = nn.Linear(inner_dim, vocab_size, bias=True)
+        self.project_layer = nn.Linear(inner_dim, vocab_size, bias=False)
 
     def forward(self, enc_state, dec_state):
         if enc_state.dim() == 3 and dec_state.dim() == 3:
@@ -148,7 +148,7 @@ class JointNet(nn.Module):
 
         dec_state = self.dec_foward(dec_state)
         enc_state = self.enc_foward(enc_state)
-        outputs = enc_state + dec_state
+        outputs = enc_state * dec_state
 
         outputs = self.tanh(outputs)
         outputs = self.project_layer(outputs)
@@ -201,36 +201,30 @@ class Transducer(nn.Module):
             zero_token = zero_token.cuda()
 
         def decode(enc_state, lengths):
-            token_list = []
 
             dec_state, hidden = self.decoder(zero_token)
 
             # print(lengths)
-            t = 0
-            while t < lengths and len(token_list) < lengths:
-                logits = self.joint(enc_state[t].view(-1), dec_state.view(-1))
-                pred = torch.argmax(logits, dim=0)
-                pred = int(pred.item())
+            batch_size = enc_state.shape[0]
+            token_list = torch.zeros([batch_size, 0])
+            t = torch.zeros([batch_size])
+            count = 0
+            while (t < lengths).any() and count < lengths.max():
+                logits = self.joint(enc_state[:, t].view(batch_size, -1), dec_state.view(batch_size, -1))
+                pred = torch.argmax(logits, dim=1)
 
-                if pred == 1:
-                    token_list.append(pred)
-                    break
-                elif pred != 0:
-                    token_list.append(pred)
-                    token = torch.LongTensor([[pred]])
+                token_list.append(pred)
+                token_list = torch.cat([token_list, pred], dim=1)
+                token = torch.LongTensor([[pred]])
 
-                    if enc_state.is_cuda:
-                        token = token.cuda()
+                if enc_state.is_cuda:
+                    token = token.cuda()
 
-                    dec_state, hidden = self.decoder(token, hidden=hidden)
-                else:
-                    t += 1
+                dec_state, hidden = self.decoder(token, hidden=hidden)
+                count += 1
             return token_list
 
-        results = []
-        for i in range(batch_size):
-            decoded_seq = decode(enc_states[i], inputs_length[i])
-            results.append(decoded_seq)
+        results = decode(enc_states, inputs_length)
 
         return results
 

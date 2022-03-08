@@ -5,10 +5,11 @@
 '''
 
 import logging
+from re import A
 import numpy as np
 import torch
 from torch import nn
-from conformer import ConformerBlock
+from miniasr.model.transt import Transducer
 
 from miniasr.model.base_asr import BaseASR
 from miniasr.module import RNNEncoder
@@ -16,31 +17,28 @@ from miniasr.module import RNNEncoder
 
 class ASR(BaseASR):
     '''
-        Conformer CTC ASR model
+        RNNT ASR model
     '''
 
     def __init__(self, tokenizer, args):
         super().__init__(tokenizer, args)
+        config = args.model
+        config.vocab_size = tokenizer.vocab_size
 
-        self.prenet = nn.Conv1d(self.in_dim, args.model.encoder.dim, 7, 2, 3)
+        self.downsample = nn.Sequential (
+            nn.Conv1d(self.in_dim, self.in_dim, 7, 2, 3),
+            nn.Conv1d(self.in_dim, self.in_dim, 7, 3, 3)
+            # nn.Conv1d(self.in_dim, self.in_dim, 7, 2, 3)
+        )
+        self.prelinear = nn.Sequential (
+            nn.Linear(self.in_dim, self.in_dim * 2),
+            nn.ReLU(),
 
-        self.encoder = []
-        for i in range(4):
-            self.encoder.append(
-                ConformerBlock(
-                    dim_head = 64,
-                    heads = 2,
-                    **args.model.encoder
-                )
-            )
-        self.encoder = nn.Sequential(*self.encoder)
-        self.ctc_output_layer = nn.Linear(
-            args.model.encoder.dim, self.vocab_size)
-        
-        # Loss function (CTC loss)
-        self.ctc_loss = torch.nn.CTCLoss(reduction='mean', blank=0, zero_infinity=True)
-        self.kldivloss = torch.nn.KLDivLoss(reduction='batchmean')
-        self.weight = 0.05
+            nn.Linear(self.in_dim * 2, self.in_dim),
+            nn.ReLU(),
+            nn.Dropout(args.model.dropout)
+        )
+        self.net = Transducer(config, self.tokenizer)
 
         # Beam decoding with Flashlight
         self.enable_beam_decode = False
@@ -118,36 +116,28 @@ class ASR(BaseASR):
 
         # Extract features
         feat, feat_len = self.extract_features(wave, wave_len)
-
-        # Encode features
-        feat = feat.transpose(1, 2)
-        feat = self.prenet(feat)
-        feat = feat.transpose(1, 2)
         
-        enc, enc_len = self.encoder(feat), feat_len // 2
+        a = torch.div(feat_len - 1, 2, rounding_mode='floor') + 1
+        a = torch.div(a - 1, 3, rounding_mode='floor') + 1
+        # a = torch.div(a - 1, 2, rounding_mode='floor') + 1
 
-        # Project hidden features to vocabularies
-        logits = self.ctc_output_layer(enc)
-
-        return logits, enc_len, feat, feat_len
+        return  self.prelinear(self.downsample(feat.transpose(1, 2)).transpose(1, 2)), \
+                a, feat, feat_len
 
     def cal_loss(self, logits, enc_len, feat, feat_len, text, text_len):
         ''' Computes CTC loss. '''
 
-        log_probs = torch.log_softmax(logits, dim=2)
-        kl_inp = log_probs.transpose(0, 1)
-        kl_tar = torch.full_like(kl_inp, 0.01)
-        kldiv_loss = self.kldivloss(kl_inp, kl_tar)
-
+        # log_probs = torch.log_softmax(logits, dim=2)
+        # print(feat_len)
+        return self.net(logits, enc_len.cpu().int(), text, text_len.cpu().int())
         # Compute loss
-        with torch.backends.cudnn.flags(deterministic=True):
-            # for reproducibility
-            ctc_loss = self.ctc_loss(
-                log_probs.transpose(0, 1),
-                text, enc_len, text_len)
+        # with torch.backends.cudnn.flags(deterministic=True):
+        #     # for reproducibility
+        #     ctc_loss = self.ctc_loss(
+        #         log_probs.transpose(0, 1),
+        #         text, enc_len, text_len)
 
-        loss = (1. - self.weight) * ctc_loss + self.weight * kldiv_loss
-        return loss / self.args.hparam.val_batch_size
+        # return ctc_loss
 
     def decode(self, logits, enc_len, decode_type=None):
         ''' Decoding. '''
@@ -157,9 +147,8 @@ class ASR(BaseASR):
 
     def greedy_decode(self, logits, enc_len):
         ''' CTC greedy decoding. '''
-        hyps = torch.argmax(logits, dim=2).cpu().tolist()  # Batch x Time
-        return [self.tokenizer.decode(h[:enc_len[i]], ignore_repeat=True)
-                for i, h in enumerate(hyps)]
+        return [self.tokenizer.decode(h[:enc_len[i]], ignore_repeat=False)
+                    for i, h in enumerate(self.net.recognize(logits, enc_len.cpu().int()))]
 
     def beam_decode(self, logits, enc_len):
         ''' Flashlight beam decoding. '''

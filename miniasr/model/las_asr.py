@@ -8,39 +8,39 @@ import logging
 import numpy as np
 import torch
 from torch import nn
-from conformer import ConformerBlock
+from torch.nn import functional
 
 from miniasr.model.base_asr import BaseASR
 from miniasr.module import RNNEncoder
+from miniasr.module import LASDecoder
 
 
 class ASR(BaseASR):
     '''
-        Conformer CTC ASR model
+        CTC ASR model
     '''
 
     def __init__(self, tokenizer, args):
         super().__init__(tokenizer, args)
 
-        self.prenet = nn.Conv1d(self.in_dim, args.model.encoder.dim, 7, 2, 3)
+        # Main model setup
+        if self.args.model.encoder.module in ['RNN', 'GRU', 'LSTM']:
+            self.encoder = RNNEncoder(self.in_dim, **args.model.encoder)
+        else:
+            raise NotImplementedError(
+                f'Unkown encoder module {self.args.model.encoder.module}')
 
-        self.encoder = []
-        for i in range(4):
-            self.encoder.append(
-                ConformerBlock(
-                    dim_head = 64,
-                    heads = 2,
-                    **args.model.encoder
-                )
-            )
-        self.encoder = nn.Sequential(*self.encoder)
-        self.ctc_output_layer = nn.Linear(
-            args.model.encoder.dim, self.vocab_size)
-        
+        if self.args.model.decoder.module in ['RNN', 'GRU', 'LSTM']:
+            self.decoder = LASDecoder(self.in_dim, **args.model.decoder)
+        else:
+            raise NotImplementedError(
+                f'Unkown decoder module {self.args.model.decoder.module}')
+
+        # self.ctc_output_layer = nn.Linear(
+        #     self.encoder.out_dim, self.vocab_size)
+
         # Loss function (CTC loss)
-        self.ctc_loss = torch.nn.CTCLoss(reduction='mean', blank=0, zero_infinity=True)
-        self.kldivloss = torch.nn.KLDivLoss(reduction='batchmean')
-        self.weight = 0.05
+        self.ctc_loss = torch.nn.functional.cross_entropy
 
         # Beam decoding with Flashlight
         self.enable_beam_decode = False
@@ -120,14 +120,10 @@ class ASR(BaseASR):
         feat, feat_len = self.extract_features(wave, wave_len)
 
         # Encode features
-        feat = feat.transpose(1, 2)
-        feat = self.prenet(feat)
-        feat = feat.transpose(1, 2)
-        
-        enc, enc_len = self.encoder(feat), feat_len // 2
+        enc, enc_len = self.encoder(feat, feat_len)
 
         # Project hidden features to vocabularies
-        logits = self.ctc_output_layer(enc)
+        logits, _ = self.decoder(enc)
 
         return logits, enc_len, feat, feat_len
 
@@ -135,9 +131,6 @@ class ASR(BaseASR):
         ''' Computes CTC loss. '''
 
         log_probs = torch.log_softmax(logits, dim=2)
-        kl_inp = log_probs.transpose(0, 1)
-        kl_tar = torch.full_like(kl_inp, 0.01)
-        kldiv_loss = self.kldivloss(kl_inp, kl_tar)
 
         # Compute loss
         with torch.backends.cudnn.flags(deterministic=True):
@@ -146,8 +139,7 @@ class ASR(BaseASR):
                 log_probs.transpose(0, 1),
                 text, enc_len, text_len)
 
-        loss = (1. - self.weight) * ctc_loss + self.weight * kldiv_loss
-        return loss / self.args.hparam.val_batch_size
+        return ctc_loss
 
     def decode(self, logits, enc_len, decode_type=None):
         ''' Decoding. '''

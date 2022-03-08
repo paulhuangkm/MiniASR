@@ -8,19 +8,26 @@ data:
     vocab: data/libri_train_1h/vocab_char.txt
 
 model:
-  name: con_rnnt
+  name: transformer_trans
+  feature_dim: 240
   extractor:
     name: fbank
     train: false
     feature: hidden_states
-  dropout: 0.2
+  dropout: 0.1
   enc:
-    hidden_size: 128
-    output_size: 128
-    n_layers: 4
-    bidirectional:
+    hidden_size: 32
+    output_size: 16
+    n_layers: 1
   joint:
+    input_size: 32
+    inner_size: 32
   dec:
+    hidden_size: 32
+    output_size: 16
+    n_layers: 1
+  share_weight: False
+  share_embedding: False
   optim:
     algo: Adam
     kwargs:
@@ -34,9 +41,9 @@ model:
     time_warp_w: 80
 
 hparam:
-  train_batch_size: 8
-  val_batch_size: 8
-  accum_grad: 4
+  train_batch_size: 2
+  val_batch_size: 2
+  accum_grad: 16
   grad_clip: 5
   njobs: 4
   pin_memory: true
@@ -49,11 +56,11 @@ checkpoint_callbacks:
 trainer:
   max_epochs: 500
   max_steps: 100000
-  check_val_every_n_epoch: 5
+  check_val_every_n_epoch: 1
   gpus: 1
   precision: 16
   logger: true
   log_every_n_steps: 5
   flush_logs_every_n_steps: 5
-  default_root_dir: model/con_libri-10h_char
+  default_root_dir: model/transformer_trans_small
   deterministic: true

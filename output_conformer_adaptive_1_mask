@@ -1,0 +1,72 @@
+result of val_set:
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.hubert.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.distiller.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.roberta.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.vq_wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.decoar2.expert: No module named 'fairseq'. Pass.
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2.hubconf: No module named 'fairseq'. Please see upstream/wav2vec2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.hubert.hubconf: No module named 'fairseq'. Please see upstream/hubert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.distiller.hubconf: No module named 'fairseq'. Please see upstream/distiller/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec.hubconf: No module named 'fairseq'. Please see upstream/wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.roberta.hubconf: No module named 'fairseq'. Please see upstream/roberta/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_wav2vec.hubconf: No module named 'fairseq'. Please see upstream/vq_wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar2.hubconf: No module named 'fairseq'. Please see upstream/decoar2/README.md
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2a-vc-vctk.expert: No module named 'resemblyzer'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.asr.expert: No module named 'fairseq'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_translation.expert: No module named 'fairseq'. Pass.
+Testing: 0it [00:00, ?it/s]Testing:   1%|          | 1/169 [00:00<02:09,  1.30it/s]Testing:   1%|          | 2/169 [00:00<01:11,  2.33it/s]Testing:   2%|▏         | 3/169 [00:01<00:49,  3.35it/s]Testing:   2%|▏         | 4/169 [00:01<00:40,  4.03it/s]Testing:   4%|▎         | 6/169 [00:01<00:28,  5.67it/s]Testing:   4%|▍         | 7/169 [00:01<00:26,  6.10it/s]Testing:   5%|▌         | 9/169 [00:01<00:21,  7.47it/s]Testing:   6%|▌         | 10/169 [00:01<00:20,  7.71it/s]Testing:   7%|▋         | 12/169 [00:02<00:16,  9.76it/s]Testing:   8%|▊         | 14/169 [00:02<00:14, 10.38it/s]Testing:   9%|▉         | 16/169 [00:02<00:14, 10.79it/s]Testing:  11%|█         | 18/169 [00:02<00:14, 10.11it/s]Testing:  12%|█▏        | 20/169 [00:02<00:12, 11.67it/s]Testing:  13%|█▎        | 22/169 [00:02<00:13, 11.27it/s]Testing:  14%|█▍        | 24/169 [00:03<00:12, 12.08it/s]Testing:  15%|█▌        | 26/169 [00:03<00:11, 11.94it/s]Testing:  17%|█▋        | 28/169 [00:03<00:11, 12.61it/s]Testing:  18%|█▊        | 30/169 [00:03<00:10, 13.21it/s]Testing:  19%|█▉        | 32/169 [00:03<00:11, 12.41it/s]Testing:  20%|██        | 34/169 [00:03<00:10, 13.49it/s]Testing:  21%|██▏       | 36/169 [00:03<00:10, 12.87it/s]Testing:  22%|██▏       | 38/169 [00:04<00:09, 13.96it/s]Testing:  24%|██▎       | 40/169 [00:04<00:08, 14.34it/s]Testing:  25%|██▍       | 42/169 [00:04<00:09, 13.90it/s]Testing:  27%|██▋       | 45/169 [00:04<00:07, 16.48it/s]Testing:  28%|██▊       | 47/169 [00:04<00:08, 15.25it/s]Testing:  29%|██▉       | 49/169 [00:04<00:07, 15.74it/s]Testing:  30%|███       | 51/169 [00:04<00:07, 15.93it/s]Testing:  31%|███▏      | 53/169 [00:05<00:07, 14.88it/s]Testing:  33%|███▎      | 55/169 [00:05<00:07, 15.82it/s]Testing:  34%|███▎      | 57/169 [00:05<00:06, 16.52it/s]Testing:  35%|███▍      | 59/169 [00:05<00:06, 16.26it/s]Testing:  36%|███▌      | 61/169 [00:05<00:06, 16.93it/s]Testing:  38%|███▊      | 64/169 [00:05<00:05, 17.81it/s]Testing:  39%|███▉      | 66/169 [00:05<00:06, 17.17it/s]Testing:  41%|████      | 69/169 [00:05<00:05, 18.77it/s]Testing:  42%|████▏     | 71/169 [00:06<00:05, 17.81it/s]Testing:  43%|████▎     | 73/169 [00:06<00:05, 17.37it/s]Testing:  45%|████▍     | 76/169 [00:06<00:04, 20.27it/s]Testing:  47%|████▋     | 79/169 [00:06<00:04, 19.02it/s]Testing:  48%|████▊     | 81/169 [00:06<00:04, 18.59it/s]Testing:  50%|████▉     | 84/169 [00:06<00:04, 20.27it/s]Testing:  51%|█████▏    | 87/169 [00:06<00:04, 19.57it/s]Testing:  53%|█████▎    | 90/169 [00:07<00:03, 20.79it/s]Testing:  56%|█████▌    | 94/169 [00:07<00:03, 22.84it/s]Testing:  57%|█████▋    | 97/169 [00:07<00:03, 21.95it/s]Testing:  60%|█████▉    | 101/169 [00:07<00:02, 25.01it/s]Testing:  62%|██████▏   | 104/169 [00:07<00:02, 25.83it/s]Testing:  63%|██████▎   | 107/169 [00:07<00:02, 23.93it/s]Testing:  65%|██████▌   | 110/169 [00:07<00:02, 25.37it/s]Testing:  67%|██████▋   | 114/169 [00:07<00:02, 26.46it/s]Testing:  69%|██████▉   | 117/169 [00:08<00:02, 24.83it/s]Testing:  72%|███████▏  | 121/169 [00:08<00:01, 26.23it/s]Testing:  73%|███████▎  | 124/169 [00:08<00:01, 25.52it/s]Testing:  75%|███████▌  | 127/169 [00:08<00:01, 25.27it/s]Testing:  78%|███████▊  | 131/169 [00:08<00:01, 26.59it/s]Testing:  79%|███████▉  | 134/169 [00:08<00:01, 26.70it/s]Testing:  81%|████████  | 137/169 [00:08<00:01, 27.28it/s]Testing:  83%|████████▎ | 141/169 [00:08<00:00, 28.06it/s]Testing:  85%|████████▌ | 144/169 [00:09<00:00, 27.54it/s]Testing:  87%|████████▋ | 147/169 [00:09<00:00, 28.16it/s]Testing:  89%|████████▉ | 151/169 [00:09<00:00, 30.84it/s]Testing:  92%|█████████▏| 155/169 [00:09<00:00, 29.51it/s]Testing:  94%|█████████▍| 159/169 [00:09<00:00, 30.90it/s]Testing:  97%|█████████▋| 164/169 [00:09<00:00, 34.87it/s]Testing: 100%|██████████| 169/169 [00:09<00:00, 38.00it/s]Testing: 100%|██████████| 169/169 [00:19<00:00, 38.00it/s]
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     288456   | 14.4   7.3    4.8    26.5   100.0  |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     54402    | 57.5   5.3    5.3    68.1   100.0  |
+
+RTF:     0.0005
+Latency: 3.3157 [ms/sentence]
+
+Testing: 100%|██████████| 169/169 [00:37<00:00,  4.47it/s]
+--------------------------------------------------------------------------------
+DATALOADER:0 TEST RESULTS
+{}
+--------------------------------------------------------------------------------
+result of test_set:
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.hubert.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.distiller.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.roberta.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.vq_wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.decoar2.expert: No module named 'fairseq'. Pass.
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2.hubconf: No module named 'fairseq'. Please see upstream/wav2vec2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.hubert.hubconf: No module named 'fairseq'. Please see upstream/hubert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.distiller.hubconf: No module named 'fairseq'. Please see upstream/distiller/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec.hubconf: No module named 'fairseq'. Please see upstream/wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.roberta.hubconf: No module named 'fairseq'. Please see upstream/roberta/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_wav2vec.hubconf: No module named 'fairseq'. Please see upstream/vq_wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar2.hubconf: No module named 'fairseq'. Please see upstream/decoar2/README.md
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2a-vc-vctk.expert: No module named 'resemblyzer'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.asr.expert: No module named 'fairseq'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_translation.expert: No module named 'fairseq'. Pass.
+Testing: 0it [00:00, ?it/s]Testing:   1%|          | 1/164 [00:00<02:18,  1.18it/s]Testing:   1%|          | 2/164 [00:00<01:07,  2.40it/s]Testing:   2%|▏         | 3/164 [00:01<00:48,  3.31it/s]Testing:   3%|▎         | 5/164 [00:01<00:28,  5.55it/s]Testing:   4%|▎         | 6/164 [00:01<00:25,  6.14it/s]Testing:   4%|▍         | 7/164 [00:01<00:24,  6.46it/s]Testing:   5%|▌         | 9/164 [00:01<00:20,  7.56it/s]Testing:   6%|▌         | 10/164 [00:01<00:20,  7.56it/s]Testing:   7%|▋         | 12/164 [00:02<00:18,  8.35it/s]Testing:   8%|▊         | 13/164 [00:02<00:18,  8.32it/s]Testing:   9%|▉         | 15/164 [00:02<00:14, 10.04it/s]Testing:  10%|█         | 17/164 [00:02<00:13, 10.75it/s]Testing:  12%|█▏        | 19/164 [00:02<00:12, 11.21it/s]Testing:  13%|█▎        | 21/164 [00:02<00:13, 10.65it/s]Testing:  14%|█▍        | 23/164 [00:03<00:12, 11.62it/s]Testing:  15%|█▌        | 25/164 [00:03<00:12, 10.98it/s]Testing:  16%|█▋        | 27/164 [00:03<00:11, 12.02it/s]Testing:  18%|█▊        | 29/164 [00:03<00:10, 12.34it/s]Testing:  19%|█▉        | 31/164 [00:03<00:10, 12.50it/s]Testing:  21%|██        | 34/164 [00:03<00:09, 13.65it/s]Testing:  22%|██▏       | 36/164 [00:04<00:09, 13.13it/s]Testing:  24%|██▍       | 39/164 [00:04<00:08, 15.54it/s]Testing:  25%|██▌       | 41/164 [00:04<00:07, 15.83it/s]Testing:  26%|██▌       | 43/164 [00:04<00:07, 15.88it/s]Testing:  27%|██▋       | 45/164 [00:04<00:07, 16.03it/s]Testing:  29%|██▊       | 47/164 [00:04<00:07, 15.18it/s]Testing:  30%|███       | 50/164 [00:04<00:06, 17.38it/s]Testing:  32%|███▏      | 52/164 [00:04<00:06, 17.76it/s]Testing:  33%|███▎      | 54/164 [00:05<00:06, 16.61it/s]Testing:  35%|███▍      | 57/164 [00:05<00:05, 19.27it/s]Testing:  36%|███▌      | 59/164 [00:05<00:05, 17.90it/s]Testing:  37%|███▋      | 61/164 [00:05<00:05, 17.58it/s]Testing:  39%|███▉      | 64/164 [00:05<00:05, 19.28it/s]Testing:  40%|████      | 66/164 [00:05<00:05, 18.23it/s]Testing:  41%|████▏     | 68/164 [00:05<00:05, 18.25it/s]Testing:  44%|████▍     | 72/164 [00:05<00:04, 22.20it/s]Testing:  46%|████▌     | 75/164 [00:06<00:04, 20.39it/s]Testing:  48%|████▊     | 78/164 [00:06<00:03, 22.15it/s]Testing:  49%|████▉     | 81/164 [00:06<00:03, 21.39it/s]Testing:  51%|█████     | 84/164 [00:06<00:03, 20.32it/s]Testing:  53%|█████▎    | 87/164 [00:06<00:03, 20.04it/s]Testing:  55%|█████▍    | 90/164 [00:06<00:03, 19.70it/s]Testing:  57%|█████▋    | 94/164 [00:06<00:02, 23.68it/s]Testing:  59%|█████▉    | 97/164 [00:07<00:02, 22.40it/s]Testing:  61%|██████    | 100/164 [00:07<00:02, 23.19it/s]Testing:  63%|██████▎   | 104/164 [00:07<00:02, 26.75it/s]Testing:  65%|██████▌   | 107/164 [00:07<00:02, 24.95it/s]Testing:  67%|██████▋   | 110/164 [00:07<00:02, 25.72it/s]Testing:  70%|██████▉   | 114/164 [00:07<00:01, 27.92it/s]Testing:  71%|███████▏  | 117/164 [00:07<00:01, 25.38it/s]Testing:  73%|███████▎  | 120/164 [00:07<00:01, 26.47it/s]Testing:  76%|███████▌  | 124/164 [00:08<00:01, 27.46it/s]Testing:  77%|███████▋  | 127/164 [00:08<00:01, 27.35it/s]Testing:  79%|███████▉  | 130/164 [00:08<00:01, 27.96it/s]Testing:  81%|████████  | 133/164 [00:08<00:01, 28.08it/s]Testing:  83%|████████▎ | 136/164 [00:08<00:00, 28.57it/s]Testing:  85%|████████▍ | 139/164 [00:08<00:00, 28.20it/s]Testing:  87%|████████▋ | 143/164 [00:08<00:00, 30.38it/s]Testing:  90%|████████▉ | 147/164 [00:08<00:00, 30.76it/s]Testing:  92%|█████████▏| 151/164 [00:08<00:00, 30.29it/s]Testing:  95%|█████████▌| 156/164 [00:09<00:00, 33.26it/s]Testing:  98%|█████████▊| 161/164 [00:09<00:00, 36.23it/s]Testing: 100%|██████████| 164/164 [00:19<00:00, 36.23it/s]
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     281530   | 14.2   7.5    4.7    26.5   100.0  |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     52576    | 57.6   5.4    5.4    68.4   100.0  |
+
+RTF:     0.0004
+Latency: 3.2536 [ms/sentence]
+
+Testing: 100%|██████████| 164/164 [00:36<00:00,  4.46it/s]
+--------------------------------------------------------------------------------
+DATALOADER:0 TEST RESULTS
+{}
+--------------------------------------------------------------------------------
