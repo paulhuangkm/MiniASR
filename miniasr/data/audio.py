@@ -47,7 +47,7 @@ class SpecAugment():
     def __init__(
             self,
             freq_mask_range=[0, 30], freq_mask_num=2,
-            time_mask_range=[0, 100], time_mask_num=2, time_mask_max=1.0,
+            time_mask_range=[0, 300], time_mask_num=2, time_mask_max=1.0,
             time_warp_w=80):
 
         self.freq_mask_range = freq_mask_range
@@ -110,8 +110,9 @@ class AdaptiveSpecAugment():
 
     def __init__(
             self,
-            time_mask_max=1.0,
-            time_warp_w=80, pM = 0.004, pS = 0.04):
+            freq_mask_range=[0, 30], time_mask_max=1.0,
+            time_mask_range=[0, 100], time_warp_w=80, pM = 0.004, pS = 0.04):
+
         self.time_mask_max = time_mask_max
         self.time_warp_w = time_warp_w
         self.pM = pM
@@ -129,13 +130,16 @@ class AdaptiveSpecAugment():
         return feat[:, mapping, :]
 
     def frequency_masking(self, feat):
-        f = np.random.randint(0, feat.shape[2])
+        f = np.random.randint(
+            self.freq_mask_range[0], self.freq_mask_range[1])
         f0 = np.random.randint(0, feat.shape[2] - f)
         feat[:, :, f0:f0 + f] = 0
 
     def time_masking(self, feat):
         max_t = int(feat.shape[1] * self.time_mask_max)
-        t = np.random.randint(0, max_t)
+        t = np.random.randint(
+            self.time_mask_range[0],
+            min(self.time_mask_range[1], max_t))
         t0 = np.random.randint(0, feat.shape[1] - t)
         feat[:, t0:t0 + t, :] = 0
 
@@ -144,6 +148,9 @@ class AdaptiveSpecAugment():
             Applies SpecAugment to feat
             feat [float tensor]: Batch x Time x Freq
         '''
+        # print(feat.shape[1], feat.shape[2])
+        self.freq_mask_range = [0, feat.shape[2] * 0.1]
+        self.time_mask_range = [0, feat.shape[1] * 0.1]
         self.time_mask_num = int(feat.shape[1] * self.pM)
         self.freq_mask_num = int(feat.shape[2] * self.pS)
 

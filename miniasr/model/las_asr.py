@@ -8,21 +8,18 @@ import logging
 import numpy as np
 import torch
 from torch import nn
-from torch.nn import functional
 
 from miniasr.model.base_asr import BaseASR
 from miniasr.module import RNNEncoder
-from miniasr.module import LASDecoder
-
+from miniasr.module.decoder_las import RNNDecoder
 
 class ASR(BaseASR):
     '''
-        CTC ASR model
+        LAS ASR model
     '''
 
     def __init__(self, tokenizer, args):
         super().__init__(tokenizer, args)
-
         # Main model setup
         if self.args.model.encoder.module in ['RNN', 'GRU', 'LSTM']:
             self.encoder = RNNEncoder(self.in_dim, **args.model.encoder)
@@ -30,17 +27,10 @@ class ASR(BaseASR):
             raise NotImplementedError(
                 f'Unkown encoder module {self.args.model.encoder.module}')
 
-        if self.args.model.decoder.module in ['RNN', 'GRU', 'LSTM']:
-            self.decoder = LASDecoder(self.in_dim, **args.model.decoder)
-        else:
-            raise NotImplementedError(
-                f'Unkown decoder module {self.args.model.decoder.module}')
+        self.decoder = RNNDecoder(self.encoder.out_dim, self.vocab_size, **args.model.decoder)
 
-        # self.ctc_output_layer = nn.Linear(
-        #     self.encoder.out_dim, self.vocab_size)
-
-        # Loss function (CTC loss)
-        self.ctc_loss = torch.nn.functional.cross_entropy
+        # Loss function CrossEntropyLoss
+        self.criterion = nn.CrossEntropyLoss()
 
         # Beam decoding with Flashlight
         self.enable_beam_decode = False
@@ -103,7 +93,7 @@ class ASR(BaseASR):
             f'LM weight {self.args.decode.lm_weight}, '
             f'Word score {self.args.decode.word_score}')
 
-    def forward(self, wave, wave_len):
+    def forward(self, wave, wave_len, text, text_len):
         '''
             Forward function to compute logits.
             Input:
@@ -121,36 +111,31 @@ class ASR(BaseASR):
 
         # Encode features
         enc, enc_len = self.encoder(feat, feat_len)
-
-        # Project hidden features to vocabularies
-        logits, _ = self.decoder(enc)
-
+        
+        # Decode
+        logits = self.decoder(enc, text, text_len)
+        # print(f'logits.shape: {logits.shape}')
         return logits, enc_len, feat, feat_len
 
     def cal_loss(self, logits, enc_len, feat, feat_len, text, text_len):
-        ''' Computes CTC loss. '''
-
-        log_probs = torch.log_softmax(logits, dim=2)
-
-        # Compute loss
-        with torch.backends.cudnn.flags(deterministic=True):
-            # for reproducibility
-            ctc_loss = self.ctc_loss(
-                log_probs.transpose(0, 1),
-                text, enc_len, text_len)
-
-        return ctc_loss
+        ''' Computes loss. '''
+        # print(f"loss function: text.shape = {text.shape}")
+        return self.criterion(logits, text)
 
     def decode(self, logits, enc_len, decode_type=None):
         ''' Decoding. '''
         if self.enable_beam_decode and decode_type != 'greedy':
             return self.beam_decode(logits, enc_len)
-        return self.greedy_decode(logits, enc_len)
-
+        
+        # print(f'hyps.shape: {torch.argmax(logits, dim=1).shape}')
+        hyps = torch.argmax(logits, dim=1).cpu().tolist()
+        return [self.tokenizer.decode(hyps[i]) for i in range(len(hyps))]
+        # return self.greedy_decode(logits, enc_len)
+    
     def greedy_decode(self, logits, enc_len):
         ''' CTC greedy decoding. '''
         hyps = torch.argmax(logits, dim=2).cpu().tolist()  # Batch x Time
-        return [self.tokenizer.decode(h[:enc_len[i]], ignore_repeat=True)
+        return [self.tokenizer.decode(h[:enc_len[i]], ignore_repeat=False)
                 for i, h in enumerate(hyps)]
 
     def beam_decode(self, logits, enc_len):

@@ -1,0 +1,160 @@
+result of val_set:
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.vq_wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.distiller.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.roberta.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.decoar2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.hubert.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2_hug.expert: No module named 'transformers'. Pass.
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_wav2vec.hubconf: No module named 'filelock'. Please see upstream/vq_wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wavlm.hubconf: No module named 'filelock'. Please see upstream/wavlm/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.apc.hubconf: No module named 'filelock'. Please see upstream/apc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec.hubconf: No module named 'filelock'. Please see upstream/wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.audio_albert.hubconf: No module named 'filelock'. Please see upstream/audio_albert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.distiller.hubconf: No module named 'filelock'. Please see upstream/distiller/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.cpc.hubconf: No module named 'filelock'. Please see upstream/cpc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.byol_a.hubconf: No module named 'filelock'. Please see upstream/byol_a/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar.hubconf: No module named 'filelock'. Please see upstream/decoar/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.mos_prediction.hubconf: No module named 'filelock'. Please see upstream/mos_prediction/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2.hubconf: No module named 'filelock'. Please see upstream/wav2vec2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.roberta.hubconf: No module named 'filelock'. Please see upstream/roberta/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar2.hubconf: No module named 'filelock'. Please see upstream/decoar2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.mockingjay.hubconf: No module named 'filelock'. Please see upstream/mockingjay/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.unispeech_sat.hubconf: No module named 'filelock'. Please see upstream/unispeech_sat/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar_layers.hubconf: No module named 'filelock'. Please see upstream/decoar_layers/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.tera.hubconf: No module named 'filelock'. Please see upstream/tera/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_apc.hubconf: No module named 'filelock'. Please see upstream/vq_apc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.npc.hubconf: No module named 'filelock'. Please see upstream/npc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.spec_augment.hubconf: No module named 'filelock'. Please see upstream/spec_augment/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.hubert.hubconf: No module named 'filelock'. Please see upstream/hubert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2_hug.hubconf: No module named 'transformers'. Please see upstream/wav2vec2_hug/README.md
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.ctc.expert: No module named 'editdistance'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.fluent_commands.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.atis.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2o-vc-vcc2020.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.enhancement_stft.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_linear_concat.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_linear.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.libri_phone.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_1hidden.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speaker_linear_utter_libri.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.mos_prediction.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.voxceleb2_ge2e.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_1hidden.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_commands.expert: No module named 'catalyst'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.quesst14_embedding.expert: No module named 'lxml'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.sv_voxceleb1.expert: No module named 'sox'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speaker_linear_frame_libri.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_translation.expert: No module named 'sacrebleu'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2a-vc-vctk.expert: No module named 'resemblyzer'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.separation_stft.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.diarization.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_linear_concat.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.quesst14_dtw.expert: No module named 'dtw'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.asr.expert: No module named 'editdistance'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.audio_snips.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.mosei.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_linear.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.sws2013.expert: No module named 'lxml'. Pass.
+[s3prl.hub] Warning: can not import s3prl.downstream.timit_phone.hubconf: No module named 'filelock'. Please see downstream/timit_phone/README.md
+[s3prl.hub] Warning: can not import s3prl.downstream.libri_phone.hubconf: No module named 'filelock'. Please see downstream/libri_phone/README.md
+Testing: 0it [00:00, ?it/s]Testing:   1%|          | 1/169 [00:00<02:28,  1.13it/s]Testing:   2%|▏         | 3/169 [00:01<00:47,  3.48it/s]Testing:   3%|▎         | 5/169 [00:01<00:30,  5.46it/s]Testing:   4%|▍         | 7/169 [00:01<00:21,  7.43it/s]Testing:   5%|▌         | 9/169 [00:01<00:17,  9.24it/s]Testing:   7%|▋         | 11/169 [00:01<00:14, 11.17it/s]Testing:   8%|▊         | 13/169 [00:01<00:12, 12.68it/s]Testing:   9%|▉         | 15/169 [00:01<00:11, 13.96it/s]Testing:  10%|█         | 17/169 [00:01<00:10, 14.95it/s]Testing:  11%|█         | 19/169 [00:02<00:09, 15.90it/s]Testing:  12%|█▏        | 21/169 [00:02<00:08, 16.65it/s]Testing:  14%|█▍        | 24/169 [00:02<00:08, 17.94it/s]Testing:  16%|█▌        | 27/169 [00:02<00:07, 18.94it/s]Testing:  17%|█▋        | 29/169 [00:02<00:07, 19.18it/s]Testing:  19%|█▉        | 32/169 [00:02<00:07, 19.43it/s]Testing:  21%|██        | 35/169 [00:02<00:06, 20.36it/s]Testing:  22%|██▏       | 38/169 [00:02<00:06, 20.90it/s]Testing:  24%|██▍       | 41/169 [00:03<00:05, 21.71it/s]Testing:  26%|██▌       | 44/169 [00:03<00:05, 22.01it/s]Testing:  28%|██▊       | 47/169 [00:03<00:05, 22.44it/s]Testing:  30%|██▉       | 50/169 [00:03<00:05, 23.00it/s]Testing:  31%|███▏      | 53/169 [00:03<00:04, 23.46it/s]Testing:  33%|███▎      | 56/169 [00:03<00:04, 24.05it/s]Testing:  35%|███▍      | 59/169 [00:03<00:04, 24.57it/s]Testing:  37%|███▋      | 62/169 [00:03<00:04, 25.17it/s]Testing:  38%|███▊      | 65/169 [00:04<00:04, 25.08it/s]Testing:  40%|████      | 68/169 [00:04<00:03, 25.41it/s]Testing:  42%|████▏     | 71/169 [00:04<00:03, 25.92it/s]Testing:  44%|████▍     | 74/169 [00:04<00:03, 26.24it/s]Testing:  46%|████▌     | 77/169 [00:04<00:03, 25.90it/s]Testing:  47%|████▋     | 80/169 [00:04<00:03, 26.53it/s]Testing:  49%|████▉     | 83/169 [00:04<00:03, 26.75it/s]Testing:  51%|█████     | 86/169 [00:04<00:03, 27.42it/s]Testing:  53%|█████▎    | 89/169 [00:04<00:02, 27.39it/s]Testing:  54%|█████▍    | 92/169 [00:05<00:02, 27.78it/s]Testing:  57%|█████▋    | 96/169 [00:05<00:02, 28.83it/s]Testing:  59%|█████▊    | 99/169 [00:05<00:02, 28.41it/s]Testing:  60%|██████    | 102/169 [00:05<00:02, 27.84it/s]Testing:  62%|██████▏   | 105/169 [00:05<00:02, 28.28it/s]Testing:  64%|██████▍   | 109/169 [00:05<00:02, 28.78it/s]Testing:  67%|██████▋   | 113/169 [00:05<00:01, 29.60it/s]Testing:  69%|██████▉   | 117/169 [00:05<00:01, 30.03it/s]Testing:  71%|███████   | 120/169 [00:05<00:01, 29.86it/s]Testing:  73%|███████▎  | 124/169 [00:06<00:01, 30.27it/s]Testing:  76%|███████▌  | 128/169 [00:06<00:01, 30.59it/s]Testing:  78%|███████▊  | 132/169 [00:06<00:01, 30.54it/s]Testing:  80%|████████  | 136/169 [00:06<00:01, 30.75it/s]Testing:  83%|████████▎ | 140/169 [00:06<00:00, 30.76it/s]Testing:  85%|████████▌ | 144/169 [00:06<00:00, 30.83it/s]Testing:  88%|████████▊ | 148/169 [00:06<00:00, 31.21it/s]Testing:  90%|████████▉ | 152/169 [00:07<00:00, 31.00it/s]Testing:  92%|█████████▏| 156/169 [00:07<00:00, 30.96it/s]Testing:  95%|█████████▍| 160/169 [00:07<00:00, 31.27it/s]Testing:  97%|█████████▋| 164/169 [00:07<00:00, 32.01it/s]Testing:  99%|█████████▉| 168/169 [00:07<00:00, 32.27it/s]Testing: 100%|██████████| 169/169 [00:19<00:00, 32.27it/s]
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     288456   | 12.6   7.4    3.7    23.7   99.9   |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2703     54402    | 53.9   4.9    4.8    63.6   99.9   |
+
+RTF:     0.0003
+Latency: 2.4796 [ms/sentence]
+
+Testing: 100%|██████████| 169/169 [00:39<00:00,  4.27it/s]
+--------------------------------------------------------------------------------
+DATALOADER:0 TEST RESULTS
+{}
+--------------------------------------------------------------------------------
+result of test_set:
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.vq_wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.distiller.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.roberta.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.decoar2.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.hubert.expert: No module named 'fairseq'. Pass.
+[s3prl.upstream.experts] Warning: can not import s3prl.upstream.wav2vec2_hug.expert: No module named 'transformers'. Pass.
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_wav2vec.hubconf: No module named 'filelock'. Please see upstream/vq_wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wavlm.hubconf: No module named 'filelock'. Please see upstream/wavlm/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.apc.hubconf: No module named 'filelock'. Please see upstream/apc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec.hubconf: No module named 'filelock'. Please see upstream/wav2vec/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.audio_albert.hubconf: No module named 'filelock'. Please see upstream/audio_albert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.distiller.hubconf: No module named 'filelock'. Please see upstream/distiller/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.cpc.hubconf: No module named 'filelock'. Please see upstream/cpc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.byol_a.hubconf: No module named 'filelock'. Please see upstream/byol_a/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar.hubconf: No module named 'filelock'. Please see upstream/decoar/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.mos_prediction.hubconf: No module named 'filelock'. Please see upstream/mos_prediction/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2.hubconf: No module named 'filelock'. Please see upstream/wav2vec2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.roberta.hubconf: No module named 'filelock'. Please see upstream/roberta/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar2.hubconf: No module named 'filelock'. Please see upstream/decoar2/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.mockingjay.hubconf: No module named 'filelock'. Please see upstream/mockingjay/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.unispeech_sat.hubconf: No module named 'filelock'. Please see upstream/unispeech_sat/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.decoar_layers.hubconf: No module named 'filelock'. Please see upstream/decoar_layers/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.tera.hubconf: No module named 'filelock'. Please see upstream/tera/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.vq_apc.hubconf: No module named 'filelock'. Please see upstream/vq_apc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.npc.hubconf: No module named 'filelock'. Please see upstream/npc/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.spec_augment.hubconf: No module named 'filelock'. Please see upstream/spec_augment/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.hubert.hubconf: No module named 'filelock'. Please see upstream/hubert/README.md
+[s3prl.hub] Warning: can not import s3prl.upstream.wav2vec2_hug.hubconf: No module named 'transformers'. Please see upstream/wav2vec2_hug/README.md
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.ctc.expert: No module named 'editdistance'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.fluent_commands.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.atis.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2o-vc-vcc2020.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.enhancement_stft.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_linear_concat.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_linear.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.libri_phone.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_1hidden.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speaker_linear_utter_libri.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.mos_prediction.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.voxceleb2_ge2e.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.timit_phone_1hidden.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_commands.expert: No module named 'catalyst'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.quesst14_embedding.expert: No module named 'lxml'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.sv_voxceleb1.expert: No module named 'sox'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speaker_linear_frame_libri.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.speech_translation.expert: No module named 'sacrebleu'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.a2a-vc-vctk.expert: No module named 'resemblyzer'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.separation_stft.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.diarization.expert: No module named 'h5py'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_linear_concat.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.quesst14_dtw.expert: No module named 'dtw'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.asr.expert: No module named 'editdistance'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.audio_snips.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.mosei.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.phone_linear.expert: No module named 'pandas'. Pass.
+[s3prl.downstream.experts] Warning: can not import s3prl.downstream.sws2013.expert: No module named 'lxml'. Pass.
+[s3prl.hub] Warning: can not import s3prl.downstream.timit_phone.hubconf: No module named 'filelock'. Please see downstream/timit_phone/README.md
+[s3prl.hub] Warning: can not import s3prl.downstream.libri_phone.hubconf: No module named 'filelock'. Please see downstream/libri_phone/README.md
+Testing: 0it [00:00, ?it/s]Testing:   1%|          | 1/164 [00:00<02:24,  1.13it/s]Testing:   2%|▏         | 3/164 [00:01<00:47,  3.36it/s]Testing:   3%|▎         | 5/164 [00:01<00:29,  5.35it/s]Testing:   4%|▍         | 7/164 [00:01<00:21,  7.25it/s]Testing:   5%|▌         | 9/164 [00:01<00:17,  8.73it/s]Testing:   7%|▋         | 11/164 [00:01<00:14, 10.63it/s]Testing:   8%|▊         | 13/164 [00:01<00:12, 11.82it/s]Testing:   9%|▉         | 15/164 [00:01<00:11, 13.05it/s]Testing:  10%|█         | 17/164 [00:01<00:10, 14.52it/s]Testing:  12%|█▏        | 19/164 [00:02<00:09, 15.43it/s]Testing:  13%|█▎        | 21/164 [00:02<00:08, 16.28it/s]Testing:  14%|█▍        | 23/164 [00:02<00:08, 17.08it/s]Testing:  16%|█▌        | 26/164 [00:02<00:07, 18.39it/s]Testing:  18%|█▊        | 29/164 [00:02<00:07, 19.18it/s]Testing:  20%|█▉        | 32/164 [00:02<00:06, 20.00it/s]Testing:  21%|██▏       | 35/164 [00:02<00:06, 20.45it/s]Testing:  23%|██▎       | 38/164 [00:03<00:05, 21.09it/s]Testing:  25%|██▌       | 41/164 [00:03<00:05, 21.68it/s]Testing:  27%|██▋       | 44/164 [00:03<00:05, 22.00it/s]Testing:  29%|██▊       | 47/164 [00:03<00:05, 22.65it/s]Testing:  30%|███       | 50/164 [00:03<00:04, 23.10it/s]Testing:  32%|███▏      | 53/164 [00:03<00:04, 23.78it/s]Testing:  34%|███▍      | 56/164 [00:03<00:04, 23.79it/s]Testing:  36%|███▌      | 59/164 [00:03<00:04, 23.56it/s]Testing:  38%|███▊      | 62/164 [00:04<00:04, 24.71it/s]Testing:  40%|███▉      | 65/164 [00:04<00:03, 25.19it/s]Testing:  41%|████▏     | 68/164 [00:04<00:03, 25.87it/s]Testing:  43%|████▎     | 71/164 [00:04<00:03, 26.07it/s]Testing:  45%|████▌     | 74/164 [00:04<00:03, 26.53it/s]Testing:  47%|████▋     | 77/164 [00:04<00:03, 26.85it/s]Testing:  49%|████▉     | 80/164 [00:04<00:03, 27.65it/s]Testing:  51%|█████     | 83/164 [00:04<00:02, 27.47it/s]Testing:  52%|█████▏    | 86/164 [00:04<00:02, 27.25it/s]Testing:  54%|█████▍    | 89/164 [00:04<00:02, 27.38it/s]Testing:  56%|█████▌    | 92/164 [00:05<00:02, 28.07it/s]Testing:  58%|█████▊    | 95/164 [00:05<00:02, 28.46it/s]Testing:  60%|█████▉    | 98/164 [00:05<00:02, 28.64it/s]Testing:  62%|██████▏   | 102/164 [00:05<00:02, 29.24it/s]Testing:  64%|██████▍   | 105/164 [00:05<00:02, 28.68it/s]Testing:  66%|██████▌   | 108/164 [00:05<00:01, 28.92it/s]Testing:  68%|██████▊   | 112/164 [00:05<00:01, 29.06it/s]Testing:  71%|███████   | 116/164 [00:05<00:01, 29.57it/s]Testing:  73%|███████▎  | 119/164 [00:06<00:01, 29.43it/s]Testing:  74%|███████▍  | 122/164 [00:06<00:01, 29.47it/s]Testing:  77%|███████▋  | 126/164 [00:06<00:01, 30.14it/s]Testing:  79%|███████▉  | 130/164 [00:06<00:01, 30.48it/s]Testing:  82%|████████▏ | 134/164 [00:06<00:00, 30.40it/s]Testing:  84%|████████▍ | 138/164 [00:06<00:00, 29.53it/s]Testing:  87%|████████▋ | 142/164 [00:06<00:00, 29.89it/s]Testing:  89%|████████▉ | 146/164 [00:06<00:00, 30.55it/s]Testing:  91%|█████████▏| 150/164 [00:07<00:00, 30.36it/s]Testing:  94%|█████████▍| 154/164 [00:07<00:00, 29.91it/s]Testing:  96%|█████████▋| 158/164 [00:07<00:00, 30.51it/s]Testing:  99%|█████████▉| 162/164 [00:07<00:00, 31.56it/s]Testing: 100%|██████████| 164/164 [00:19<00:00, 31.56it/s]
+
+Character errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     281530   | 12.4   7.5    3.7    23.5   99.9   |
+
+Word errors
+| #Snt     #Tok     | Sub    Del    Ins    Err    SErr   |
+| 2620     52576    | 54.0   4.6    5.1    63.8   99.9   |
+
+RTF:     0.0003
+Latency: 2.5329 [ms/sentence]
+
+Testing: 100%|██████████| 164/164 [00:39<00:00,  4.20it/s]
+--------------------------------------------------------------------------------
+DATALOADER:0 TEST RESULTS
+{}
+--------------------------------------------------------------------------------

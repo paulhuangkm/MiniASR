@@ -144,7 +144,7 @@ class BaseASR(pl.LightningModule):
 
         return feat, feat_len
 
-    def forward(self, wave, wave_len):
+    def forward(self, wave, wave_len, text, text_len):
         ''' Forward function to compute logits. '''
         raise NotImplementedError
         # Should return logits, enc_len, feat, feat_len
